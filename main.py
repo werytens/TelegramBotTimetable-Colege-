@@ -49,7 +49,12 @@ timetable = {
     }
 }
 
-bot = Bot(token = '')
+with open("token.json", "r") as file:
+    tokenfile = json.load(file)
+
+TOKEN = tokenfile["token"]
+
+bot = Bot(token = TOKEN)
 dp = Dispatcher(bot)
 
 
