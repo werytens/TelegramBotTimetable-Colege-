@@ -15,7 +15,7 @@ day_2 = InlineKeyboardButton(text='Вторник', callback_data="day_2")
 day_3 = InlineKeyboardButton(text='Среда', callback_data="day_3")
 day_4 = InlineKeyboardButton(text='Четверг', callback_data="day_4")
 day_5 = InlineKeyboardButton(text='Пятница', callback_data="day_5")
-keyboard.add(day_1, day_2, day_5)
+keyboard.add(day_1, day_2, day_3)
 keyboard.add(day_4, day_5)
 
 
