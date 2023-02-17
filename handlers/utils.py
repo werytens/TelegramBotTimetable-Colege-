@@ -17,7 +17,7 @@ async def send_welcome(message: types.Message):
     greet_kb.add(button_lesson)
     greet_kb.add(button_timetable)
 
-    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n\n<u><b>В разработке:</b></u>\n\n1. Функционал, позволяющий записывать и получить домашнее задание в соответствии с расписанием.\n2. Функционал, позволяющий узнать замены.\n\n<u><b>Информация о боте:</b></u>\n\n<b>Версия бота: </b>1.0.3.\n~ Stable V1", reply_markup = greet_kb, parse_mode = "HTML")
+    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n\n<u><b>В разработке:</b></u>\n\n1. Функционал, позволяющий записывать и получить домашнее задание в соответствии с расписанием.\n2. Функционал, позволяющий узнать замены.\n\n<u><b>Информация о боте:</b></u>\n\n<b>Версия бота: </b>1.0.3.\n<b>ЯП: </b>Python.\n<b>Библиотека: </b>Aiogram.\n~ Stable V1", reply_markup = greet_kb, parse_mode = "HTML")
              
 
 @dp.message_handler(commands = ["weekinfo"])

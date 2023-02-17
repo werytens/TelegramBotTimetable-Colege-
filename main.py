@@ -10,7 +10,6 @@ import datetime
 # Для добавления хендлера нужно добавить новый файл в папку handlers, после чего в __init__.py записать "from .filename import dp". Внутри нового хендлера прописать следующие строки:
 # from aiogram import types
 # from main import dp
-
 timetable = {
     1: {
         1: "8:50:00 - 10:20:00 | Технический иностранный.",
@@ -66,8 +65,7 @@ async def send_welcome(message: types.Message):
 
     timeNow = datetime.datetime.now()
     day = datetime.datetime.isoweekday(datetime.datetime.now())
-    # timeNow = datetime.datetime.strptime('10-02-2023 10:20:00', '%d-%m-%Y %H:%M:%S'); day = 5
-
+    
     if day == 1:
         if datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str(timetable[1][1][:7]), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[1][1][10:18]), '%H:%M:%S'):
             endTime = datetime.datetime.strptime(str(timetable[1][1][10:18]), '%H:%M:%S')
@@ -115,7 +113,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[2][1][10:17]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[20:]}", parse_mode = "HTML")
             
         
         elif datetime.datetime.strptime((str(timeNow)[11:19]), '%H:%M:%S') >= datetime.datetime.strptime(str(timetable[2][2.1][:7]), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[2][2.1][10:18]), '%H:%M:%S'):
@@ -124,7 +122,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[2][2.1][10:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[22:]}", parse_mode = "HTML")
             
         
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[2][2.2][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[2][2.2][11:18]), '%H:%M:%S'):
@@ -133,7 +131,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[2][2.2][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[22:]}", parse_mode = "HTML")
             
        
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[2][3][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[2][3][11:18]), '%H:%M:%S'):
@@ -142,7 +140,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[2][3][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[22:]}", parse_mode = "HTML")
             
         
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[2][4][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[2][4][11:18]), '%H:%M:%S'):
@@ -164,7 +162,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][1][10:17]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[21:]}", parse_mode = "HTML")
             
         
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[3][2.1][:7] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[3][2.1][10:18]), '%H:%M:%S'):
@@ -172,7 +170,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][2.1][10:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[22:]}", parse_mode = "HTML")
             
         
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[3][2.2][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[3][2.2][11:18]), '%H:%M:%S'):
@@ -181,7 +179,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][2.2][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[22:]}", parse_mode = "HTML")
             
 
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[3][3][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[3][3][11:18]), '%H:%M:%S'):
@@ -189,7 +187,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][3][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[22:]}", parse_mode = "HTML")
             
 
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[3][4][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[3][4][11:18]), '%H:%M:%S'):
@@ -209,7 +207,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][1][10:17]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[21:]}", parse_mode = "HTML")
             
 
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[4][2.1][:7] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[4][2.1][10:18]), '%H:%M:%S'):
@@ -217,7 +215,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][2.1][10:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[22:]}", parse_mode = "HTML")
             
 
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[4][2.2][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[4][2.2][11:18]), '%H:%M:%S'):
@@ -225,7 +223,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][2.2][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[22:]}", parse_mode = "HTML")
             
 
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[4][3][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[4][3][11:18]), '%H:%M:%S'):
@@ -233,7 +231,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][3][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[22:]}", parse_mode = "HTML")
             
 
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[4][4][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[4][4][11:18]), '%H:%M:%S'):
@@ -252,21 +250,21 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][1][10:17]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №1</b>.\n<b>Название:</b> {(str(timetable[day][1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.1]))[21:]}", parse_mode = "HTML")
             
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[5][2.1][:7] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[5][2.1][10:18]), '%H:%M:%S'):
             #await message.answer(f'Сейчас пара: {(str(timetable[day][2.1]))[20:]}, пара номер 2, до конца пары .')
             endTime = datetime.datetime.strptime(str(timetable[day][2.1][10:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.1]))[21:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][2.2]))[22:]}", parse_mode = "HTML")
             
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[5][2.2][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[5][2.2][11:18]), '%H:%M:%S'):
             #await message.answer(f'Сейчас пара: {(str(timetable[day][2.2]))[20:]}, пара номер 2, до конца пары .')
             endTime = datetime.datetime.strptime(str(timetable[day][2.2][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №2</b>.\n<b>Название:</b> {(str(timetable[day][2.2]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][3]))[22:]}", parse_mode = "HTML")
             
 
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[5][3][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[5][3][11:18]), '%H:%M:%S'):
@@ -274,7 +272,7 @@ async def send_welcome(message: types.Message):
             endTime = datetime.datetime.strptime(str(timetable[day][3][11:18]), '%H:%M:%S')
             timeToEndRemain = TimeCalc(endTime, timeNow)
 
-            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[20:]}", parse_mode = "HTML")
+            await message.answer(f"<u><b>Вот информация о текущей паре:</b></u>\n\n<b>Курс:</b> ИСиП(п) 2/3. <b>Пара №3</b>.\n<b>Название:</b> {(str(timetable[day][3]))[22:]}\n<b>До конца пары осталось:</b> {timeToEndRemain}.\n\n<b>Следующая пара:</b> {(str(timetable[day][4]))[22:]}", parse_mode = "HTML")
             
         elif datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') >= datetime.datetime.strptime(str( timetable[5][4][:8] ), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], '%H:%M:%S') < datetime.datetime.strptime(str(timetable[5][4][11:18]), '%H:%M:%S'):
             #await message.answer(f'Сейчас пара: {(str(timetable[day][4]))[20:]}, пара номер 4, до конца пары .')
