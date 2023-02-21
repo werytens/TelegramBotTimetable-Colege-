@@ -25,25 +25,21 @@ async def weekinfocommand(message: types.Message):
     with open("jsons/main.json", "r") as f:
         table = json.load(f)
 
-    firstWeekMonday = table["firstWeekMonday"]
-    firstWeekMonday = datetime.datetime.strptime(firstWeekMonday, '%d-%m-%Y')
+    firstWeekMonday = datetime.datetime.strptime("30-01-2023", '%d-%m-%Y')
     days = (datetime.datetime.now() - firstWeekMonday).days
 
-    perm = days // 7 / 2
-
-    if perm == 0:
+    if days // 7 % 2 == 0:
         table["key"] = 2
-    elif perm != 0:
+    else:
         table["key"] = 1
     
 
-    if table["key"] == 1:
+    if table["key"] == 2:
         weekStatus = 'Числитель'
     else:
         weekStatus = "Знаменатель"
     
     await message.answer(f"<u><b>Информация о текущей неделе:</b></u>\n\n<b>Эта неделя: </b>{weekStatus}.", parse_mode = "HTML")
-
 
     with open("jsons/main.json", "w", encoding = "UTF-8") as file:
         json.dump(table, file)

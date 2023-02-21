@@ -16,11 +16,11 @@ bot = Bot(token = TOKEN)
 dp = Dispatcher(bot)
 
 
-timeNow = datetime.datetime.now()
-day = datetime.datetime.isoweekday(datetime.datetime.now())
-
 @dp.message_handler(commands = ['lesson'])
 async def send_lesson(message: types.Message):
+    timeNow = datetime.datetime.now()
+    day = datetime.datetime.isoweekday(datetime.datetime.now())
+
     with open("jsons/timetable.json", "r", encoding = "UTF-8") as file:
         timetable = json.load(file)
 
