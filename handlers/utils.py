@@ -44,6 +44,16 @@ async def weekinfocommand(message: types.Message):
     with open("jsons/main.json", "w", encoding = "UTF-8") as file:
         json.dump(table, file)
 
+@dp.message_handler(commands = ["eventsinfo"])
+async def eventsinfo(message: types.Message):
+    th = (datetime.datetime.strptime("23-02-2023", '%d-%m-%Y') - datetime.datetime.now()).days
+    tt = (datetime.datetime.strptime("23-02-2023", '%d-%m-%Y') - datetime.datetime.now()).seconds
+
+    def toFixed(numObj, digits=0):
+        return f"{numObj:.{digits}f}"
+
+    await message.answer(f"<u><b>Информация о различных событиях:</b></u>\n\n<b>Времени до 23-го февраля: </b>{toFixed(((tt / 3600) + (th * 24)))} час(а/ов)", parse_mode = "HTML")
+
 @dp.message_handler()
 async def othermessage(message: types.Message):
     with open("jsons/main.json", "r") as f:
