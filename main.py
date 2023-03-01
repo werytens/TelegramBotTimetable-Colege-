@@ -76,11 +76,18 @@ async def send_lesson(message: types.Message):
     if datetime.datetime.strptime(str(timeNow)[11:19], "%H:%M:%S") >= datetime.datetime.strptime(str(timetable[str(day)]["3"]["startTime"]), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], "%H:%M:%S") <= datetime.datetime.strptime(str(timetable[str(day)]["3"]["endTime"]), '%H:%M:%S'):
         endTime = datetime.datetime.strptime(str(timetable[str(day)]["3"]["endTime"]), "%H:%M:%S")
 
+        with open("jsons/main.json", "r") as f:
+            table = json.load(f)
+
         lessonNumber = "3"
         lessonName = timetable[str(day)][lessonNumber]["lessonName"]
         lessonEndTime = timeForLessonEnd(endTime, timeNow)
         lessonClassroom = timetable[str(day)][lessonNumber]["classRoom"]
         nextLessonName = timetable[str(day)]["4"]["lessonName"]
+
+        if day == 4 and table["key"] == 2:
+            lessonName = timetable[str(day)][lessonNumber]["lessonNameDen"]
+            lessonClassroom = timetable[str(day)][lessonNumber]["classRoomDen"]
 
         await message.answer(sendCommand(lessonNumber, lessonName, lessonEndTime, lessonClassroom, nextLessonName), parse_mode = "HTML")
 
@@ -89,11 +96,21 @@ async def send_lesson(message: types.Message):
     if datetime.datetime.strptime(str(timeNow)[11:19], "%H:%M:%S") >= datetime.datetime.strptime(str(timetable[str(day)]["4"]["startTime"]), '%H:%M:%S') and datetime.datetime.strptime(str(timeNow)[11:19], "%H:%M:%S") <= datetime.datetime.strptime(str(timetable[str(day)]["4"]["endTime"]), '%H:%M:%S'):
         endTime = datetime.datetime.strptime(str(timetable[str(day)]["4"]["endTime"]), "%H:%M:%S")
 
+        with open("jsons/main.json", "r") as f:
+            table = json.load(f)
+
         lessonNumber = "4"
         lessonName = timetable[str(day)][lessonNumber]["lessonName"]
         lessonEndTime = timeForLessonEnd(endTime, timeNow)
         lessonClassroom = timetable[str(day)][lessonNumber]["classRoom"]
         nextLessonName = "-"
+
+        if day == 2 and table["key"] == 2:
+            lessonName = timetable[str(day)][lessonNumber]["lessonNameDen"]
+            lessonClassroom = timetable[str(day)][lessonNumber]["classRoomDen"]
+        elif day == 5 and table["key"] == 2:
+            lessonName = timetable[str(day)][lessonNumber]["lessonNameDen"]
+            lessonClassroom = timetable[str(day)][lessonNumber]["classRoomDen"]
 
         await message.answer(sendCommand(lessonNumber, lessonName, lessonEndTime, lessonClassroom, nextLessonName), parse_mode = "HTML")
 

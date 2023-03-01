@@ -11,13 +11,17 @@ async def send_welcome(message: types.Message):
     button_help = KeyboardButton('/help')
     button_lesson = KeyboardButton('/lesson')
     button_timetable = KeyboardButton('/timetable')
+    weekinfo = KeyboardButton('/weekinfo')
+    eventsinfo = KeyboardButton('/eventsinfo')
+    
 
     greet_kb = ReplyKeyboardMarkup()
     greet_kb.add(button_help)
     greet_kb.add(button_lesson)
     greet_kb.add(button_timetable)
+    greet_kb.add(weekinfo, eventsinfo)
 
-    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n\n<u><b>В разработке:</b></u>\n\n1. Функционал, позволяющий записывать и получить домашнее задание в соответствии с расписанием.\n2. Функционал, позволяющий узнать замены.\n\n<u><b>Информация о боте:</b></u>\n\n<b>Версия бота: </b>1.0.3.\n<b>ЯП: </b>Python.\n<b>Библиотека: </b>Aiogram.\n~ Stable V1", reply_markup = greet_kb, parse_mode = "HTML")
+    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n/eventsinfo - узнать информацию о событиях.\n\n<u><b>В разработке:</b></u>\n\n1. Функционал, позволяющий записывать и получить домашнее задание в соответствии с расписанием.\n2. Функционал, позволяющий узнать замены.\n\n<u><b>Информация о боте:</b></u>\n\n<b>Версия бота: </b>1.0.3.\n<b>ЯП: </b>Python.\n<b>Библиотека: </b>Aiogram.\n~ Stable V1", reply_markup = greet_kb, parse_mode = "HTML")
              
 
 @dp.message_handler(commands = ["weekinfo"])
@@ -46,13 +50,18 @@ async def weekinfocommand(message: types.Message):
 
 @dp.message_handler(commands = ["eventsinfo"])
 async def eventsinfo(message: types.Message):
-    th = (datetime.datetime.strptime("23-02-2023", '%d-%m-%Y') - datetime.datetime.now()).days
-    tt = (datetime.datetime.strptime("23-02-2023", '%d-%m-%Y') - datetime.datetime.now()).seconds
+    th = (datetime.datetime.strptime("8-03-2023", '%d-%m-%Y') - datetime.datetime.now()).days
+    tt = (datetime.datetime.strptime("8-02-2023", '%d-%m-%Y') - datetime.datetime.now()).seconds
 
-    def toFixed(numObj, digits=0):
+    def toFixed(numObj, digits = 0):
         return f"{numObj:.{digits}f}"
+    
+    hours = int(toFixed(((tt / 3600) + (th * 24))))
 
-    await message.answer(f"<u><b>Информация о различных событиях:</b></u>\n\n<b>Времени до 23-го февраля: </b>{toFixed(((tt / 3600) + (th * 24)))} час(а/ов)", parse_mode = "HTML")
+    if hours >= 24: date = f"{toFixed(hours / 24)} дней"
+    else: date = f"{hours} час(а/ов)"
+
+    await message.answer(f"<u><b>Информация о различных событиях:</b></u>\n\n<b>Времени до 8-го марта: </b>{date}.", parse_mode = "HTML")
 
 @dp.message_handler()
 async def othermessage(message: types.Message):
