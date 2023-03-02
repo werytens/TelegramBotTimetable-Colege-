@@ -21,7 +21,7 @@ async def send_welcome(message: types.Message):
     greet_kb.add(button_timetable)
     greet_kb.add(weekinfo, eventsinfo)
 
-    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n/eventsinfo - узнать информацию о событиях.\n\n<u><b>В разработке:</b></u>\n\n1. Функционал, позволяющий записывать и получить домашнее задание в соответствии с расписанием.\n2. Функционал, позволяющий узнать замены.\n\n<u><b>Информация о боте:</b></u>\n\n<b>Версия бота: </b>1.0.3.\n<b>ЯП: </b>Python.\n<b>Библиотека: </b>Aiogram.\n~ Stable V1", reply_markup = greet_kb, parse_mode = "HTML")
+    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n/eventsinfo - узнать информацию о событиях.\n\n<u><b>Информация о боте:</b></u>\n\n<b>Версия бота: </b>2.2.0.\n<b>ЯП: </b>Python.\n<b>Библиотека: </b>Aiogram.\n~ Stable V1", reply_markup = greet_kb, parse_mode = "HTML")
              
 
 @dp.message_handler(commands = ["weekinfo"])
@@ -56,12 +56,22 @@ async def eventsinfo(message: types.Message):
     def toFixed(numObj, digits = 0):
         return f"{numObj:.{digits}f}"
     
-    hours = int(toFixed(((tt / 3600) + (th * 24))))
+    def knowDateFor(_date):
+        th = (datetime.datetime.strptime(_date, '%d-%m-%Y') - datetime.datetime.now()).days
+        tt = (datetime.datetime.strptime(_date, '%d-%m-%Y') - datetime.datetime.now()).seconds
 
-    if hours >= 24: date = f"{toFixed(hours / 24)} дней"
-    else: date = f"{hours} час(а/ов)"
+        hours = int(toFixed(((tt / 3600) + (th * 24))))
 
-    await message.answer(f"<u><b>Информация о различных событиях:</b></u>\n\n<b>Времени до 8-го марта: </b>{date}.", parse_mode = "HTML")
+        if hours >= 24: date = f"{toFixed(hours / 24)} дней"
+        else: date = f"{hours} час(а/ов)"
+
+        return date
+        
+    date8mart = knowDateFor("8-03-2023")
+    datefinally = knowDateFor("1-07-2023")
+    
+
+    await message.answer(f"<u><b>Информация о различных событиях:</b></u>\n\n<b>Времени до 8-го марта: </b>{date8mart}.\n<b>Времени до конца года: </b>{datefinally}.", parse_mode = "HTML")
 
 @dp.message_handler()
 async def othermessage(message: types.Message):
