@@ -21,7 +21,7 @@ async def send_welcome(message: types.Message):
     greet_kb.add(button_timetable)
     greet_kb.add(weekinfo, eventsinfo)
 
-    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n/eventsinfo - узнать информацию о событиях.\n\n<u><b>Информация о боте:</b></u>\n\n<b>Версия бота: </b>2.2.0.\n<b>ЯП: </b>Python.\n<b>Библиотека: </b>Aiogram.\n~ Stable V1", reply_markup = greet_kb, parse_mode = "HTML")
+    await message.answer(f"<u><b>Привет! Команды бота TBTC:</b></u>\n\n/help - эта команда.\n/lesson - узнать информацию о паре, которая идёт сейчас.\n/timetable - узнать общее расписание.\n/weekinfo - информация о текущей неделе.\n/eventsinfo - узнать информацию о событиях.\n\n<u><b>Информация о боте:</b></u>\n\n<b>ЯП: </b>Python.\n<b>Версия бота: </b>2.3.0.\n<b>Библиотека: </b>Aiogram.", reply_markup = greet_kb, parse_mode = "HTML")
              
 
 @dp.message_handler(commands = ["weekinfo"])
@@ -78,18 +78,15 @@ async def othermessage(message: types.Message):
     with open("jsons/main.json", "r") as f:
         table = json.load(f)
 
-    firstWeekMonday = table["firstWeekMonday"]
-    firstWeekMonday = datetime.datetime.strptime(firstWeekMonday, '%d-%m-%Y')
+    firstWeekMonday = datetime.datetime.strptime("30-01-2023", '%d-%m-%Y')
     days = (datetime.datetime.now() - firstWeekMonday).days
 
-    perm = days // 7 / 2
-
-    if perm == 0:
+    if days // 7 % 2 == 0:
         table["key"] = 2
-    elif perm != 0:
+    else:
         table["key"] = 1
     
-    await message.answer('Команда не распознана')
+    await message.answer('Команда не распознана.')
 
     with open("jsons/main.json", "w", encoding = "UTF-8") as file:
         json.dump(table, file)
