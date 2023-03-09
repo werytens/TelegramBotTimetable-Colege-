@@ -67,11 +67,10 @@ async def eventsinfo(message: types.Message):
 
         return date
         
-    date8mart = knowDateFor("8-03-2023")
     datefinally = knowDateFor("1-07-2023")
     
 
-    await message.answer(f"<u><b>Информация о различных событиях:</b></u>\n\n<b>Времени до 8-го марта: </b>{date8mart}.\n<b>Времени до конца года: </b>{datefinally}.", parse_mode = "HTML")
+    await message.answer(f"<u><b>Информация о различных событиях:</b></u>\n\n<b>Времени до конца года: </b>{datefinally}.", parse_mode = "HTML")
 
 @dp.message_handler()
 async def othermessage(message: types.Message):

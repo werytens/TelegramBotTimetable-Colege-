@@ -36,7 +36,7 @@ async def send_lesson(message: types.Message):
 
         message = f"""На данный момент пары не идут.
         
-Текущая дата: {str(timeNow)[5:7]}.{str(timeNow)[5:7]}.{str(timeNow)[:4]}.   
+Текущая дата: {str(timeNow)[8:10]}.{str(timeNow)[5:7]}.{str(timeNow)[:4]}.   
 Текущее время: {str(timeNow.hour)} час{hoursList[timeNow.hour - 1]} {str(timeNow.minute)} минут{minuteList[timeNow.minute - 1]}.
 """
 
